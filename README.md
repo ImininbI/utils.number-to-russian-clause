@@ -1,4 +1,4 @@
-### Number to russian clause library
+### Number to russian text library
 
 Library to translate integer numbers (instances of `java.math.BigInteger`) to russian text. 
 

@@ -7,10 +7,10 @@
     ">
 
     <groupId>imininbi.utils</groupId>
-    <artifactId>number-to-russian-clause</artifactId>
+    <artifactId>number-to-russian-text</artifactId>
     <version>1.0</version>
 
-    <name>Number to russian clause</name>
+    <name>Number to russian text</name>
 
     <properties>
         <!-- library versions -->

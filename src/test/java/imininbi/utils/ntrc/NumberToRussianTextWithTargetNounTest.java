@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Parameterized.class)
-public class NumberToRussianClauseWithTargetNounTest {
+public class NumberToRussianTextWithTargetNounTest {
     public static final Noun PENCIL = Noun
             .withGender(MASCULINE)
             .withOneText("карандаш")
@@ -39,7 +39,7 @@ public class NumberToRussianClauseWithTargetNounTest {
     private final BigInteger input;
     private final String expected;
 
-    public NumberToRussianClauseWithTargetNounTest(String input, Noun noun, String expected) {
+    public NumberToRussianTextWithTargetNounTest(String input, Noun noun, String expected) {
         this.noun = noun;
         this.input = new BigInteger(input);
         this.expected = expected;
@@ -47,7 +47,7 @@ public class NumberToRussianClauseWithTargetNounTest {
 
     @Test
     public void test() throws Exception {
-        val actual = new NumberToRussianClause().transform(input, noun);
+        val actual = new NumberToRussianText().transform(input, noun);
         assertThat(actual, equalTo(expected));
     }
 

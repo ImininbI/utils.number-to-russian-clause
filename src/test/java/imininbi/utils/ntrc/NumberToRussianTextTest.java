@@ -12,18 +12,18 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Parameterized.class)
-public class NumberToRussianClauseTest {
+public class NumberToRussianTextTest {
     private final BigInteger input;
     private final String expected;
 
-    public NumberToRussianClauseTest(String input, String expected) {
+    public NumberToRussianTextTest(String input, String expected) {
         this.input = new BigInteger(input);
         this.expected = expected;
     }
 
     @Test
     public void test() throws Exception {
-        val actual = new NumberToRussianClause().transform(input);
+        val actual = new NumberToRussianText().transform(input);
         assertThat(actual, equalTo(expected));
     }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class NumberToRussianClause {
+public class NumberToRussianText {
     private int triadsAmount;
     private int firstTriadLength;
 
