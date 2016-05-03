@@ -38,6 +38,16 @@ public class NumberToRussianText {
     }
 
     private void init(@NotNull BigInteger number) {
+        if (number.signum() >= 0) {
+            initWithNotNegativeNumber(number);
+
+        } else {
+            initWithNotNegativeNumber(number.negate());
+            resultWords.add("минус");
+        }
+    }
+
+    private void initWithNotNegativeNumber(@NotNull BigInteger number) {
         val numberString = number.toString();
         val numberStringLength = numberString.length();
         val remainder = (numberStringLength % 3);
