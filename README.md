@@ -40,8 +40,9 @@ String numberString = new NumberToRussianClause().transform(number, UsDollarNoun
 
 assertThat(numberString, equalTo("один доллар США"));
 ```
-### Maven compile dependencies
-- org.jetbrains:annotations:15.0
+### Maven compile and provided dependencies
+- org.jetbrains:annotations:15.0 (compile)
+- org.projectlombok:lombok:1.16.8 (provided)
 
 ### License
 MIT
