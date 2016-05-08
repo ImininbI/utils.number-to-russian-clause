@@ -40,7 +40,7 @@ class NumberNouns {
     }
 
     @NotNull
-    public static Noun forIndex(int index) {
+    public static Noun withIndex(int index) {
         assert (index >= 0 && index < NUMBER_NOUNS.length);
         return NUMBER_NOUNS[index];
     }

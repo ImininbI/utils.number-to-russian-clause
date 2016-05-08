@@ -1,8 +1,10 @@
 package imininbi.utils.ntrc;
 
+import lombok.val;
 import org.jetbrains.annotations.NotNull;
 
-// Empty structure like class with getters
+import java.math.BigInteger;
+
 public class Noun {
     private final Gender gender;
     private final String oneText;
@@ -27,13 +29,60 @@ public class Noun {
     }
 
     @NotNull
+    @SuppressWarnings("unused")
     public String getTwoToFourText() {
         return twoToFourText;
     }
 
     @NotNull
+    @SuppressWarnings("unused")
     public String getZeroOrMoreThenFourText() {
         return zeroOrMoreThenFourText;
+    }
+
+    @NotNull
+    @SuppressWarnings("unused")
+    public String getText(@NotNull BigInteger number) {
+        val numberAbsString = number.abs().toString();
+        val stringLength = numberAbsString.length();
+
+        switch (stringLength) {
+            case 0: {
+                return zeroOrMoreThenFourText;
+            }
+
+            case 1: {
+                char unitDigit = numberAbsString.charAt(0);
+                return getTextByUnitDigit(unitDigit);
+            }
+
+            default: {
+                char unitDigit = numberAbsString.charAt(stringLength - 1);
+                char dozenDigit = numberAbsString.charAt(stringLength - 2);
+                return getTextByDozenAdnUnitDigits(dozenDigit, unitDigit);
+            }
+        }
+    }
+
+    @NotNull String getTextByDozenAdnUnitDigits(char dozenDigit, char unitDigit) {
+        if (dozenDigit == '1') {
+            return zeroOrMoreThenFourText;
+
+        } else {
+            return getTextByUnitDigit(unitDigit);
+        }
+    }
+
+    @NotNull String getTextByUnitDigit(char unitDigit) {
+        if (unitDigit == '1') {
+            return oneText;
+
+        } else if (unitDigit >= '2' && unitDigit <= '4') {
+            return twoToFourText;
+
+        } else {
+            return zeroOrMoreThenFourText;
+        }
     }
 
     @Override

@@ -77,7 +77,7 @@ public class NumberToRussianText {
                 throw tooBigInputNumber();
             }
 
-            Noun numberNoun = NumberNouns.forIndex(numberNounIndex);
+            Noun numberNoun = NumberNouns.withIndex(numberNounIndex);
 
             addFirstTriadWords(numberNoun.getGender());
             addNounWordForFirstTriad(numberNoun);
@@ -86,7 +86,7 @@ public class NumberToRussianText {
             int currentTriadStart = firstTriadLength;
 
             while (currentTriadRank >= 0) {
-                numberNoun = NumberNouns.forIndex(currentTriadRank);
+                numberNoun = NumberNouns.withIndex(currentTriadRank);
 
                 setCurrentTriad(currentTriadStart);
 
@@ -174,7 +174,8 @@ public class NumberToRussianText {
     }
 
     private boolean addUnitDigitWord(@NotNull Gender nounGender) {
-        return resultWords.add(NumberWords.forUnitsLessThenTen(unitDigit, nounGender));
+        val words = NumberWords.forUnitsLessThenTen(unitDigit, nounGender);
+        return resultWords.add(words);
     }
 
     @NotNull
@@ -184,7 +185,7 @@ public class NumberToRussianText {
                 + "Max supported number rank is '%s'";
 
         val maxNumberIndex = NumberNouns.maxIndex();
-        val maxNumberNoun = NumberNouns.forIndex(maxNumberIndex);
+        val maxNumberNoun = NumberNouns.withIndex(maxNumberIndex);
         val message = String.format(format, maxNumberNoun.getOneText());
 
         return new IllegalArgumentException(message);
@@ -219,34 +220,13 @@ public class NumberToRussianText {
     }
 
     private boolean addNounWordByDozenAndUnitDigits(@NotNull Noun noun) {
-        return resultWords.add(nounWordByDozenAndUnitDigits(noun));
-    }
-
-    @NotNull
-    private String nounWordByDozenAndUnitDigits(@NotNull Noun noun) {
-        if (dozenDigit == '1') {
-            return noun.getZeroOrMoreThenFourText();
-
-        } else {
-            return nounWordByUnitDigit(noun);
-        }
+        String word = noun.getTextByDozenAdnUnitDigits(dozenDigit, unitDigit);
+        return resultWords.add(word);
     }
 
     private boolean addNounWordByUnitDigit(@NotNull Noun noun) {
-        return resultWords.add(nounWordByUnitDigit(noun));
-    }
-
-    @NotNull
-    private String nounWordByUnitDigit(@NotNull Noun noun) {
-        if (unitDigit == '1') {
-            return noun.getOneText();
-
-        } else if (unitDigit >= '2' && unitDigit <= '4') {
-            return noun.getTwoToFourText();
-
-        } else {
-            return noun.getZeroOrMoreThenFourText();
-        }
+        val word = noun.getTextByUnitDigit(unitDigit);
+        return resultWords.add(word);
     }
 
     @NotNull
